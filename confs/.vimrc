@@ -28,7 +28,6 @@ filetype plugin indent on
 set tags=tags;/
 set ofu=syntaxcomplete#complete
 set completeopt+=longest,menuone
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 set autoindent
 set tabstop=2
