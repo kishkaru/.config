@@ -4,6 +4,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 ## alias
 alias ls='ls -FGal --color'
+alias gs='git status'
 
 ## tell grep to highlight matches
 export GREP_OPTIONS='--color=auto'
