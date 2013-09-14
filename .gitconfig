@@ -1,6 +1,6 @@
 [user]
   name = Kishan Karunaratne
-  email = kishkaru@gmail.com
+  email = kishan@karu.io
 [credential]
   helper = cache --timeout=3600
 [core]
