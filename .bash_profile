@@ -5,6 +5,8 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 ## alias
 alias ls='ls -FGal --color'
 alias gs='git status'
+alias gp='git pull origin master'
+alias gpm='git push origin master'
 
 ## tell grep to highlight matches
 export GREP_OPTIONS='--color=auto'
