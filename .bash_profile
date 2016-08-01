@@ -7,12 +7,15 @@ alias ls='ls -FGalh --color'
 alias gs='git status'
 alias gp='git pull origin master'
 alias gpt='git pull origin trunk'
+alias gpd='git pull datastax master'
 alias gpm='git push origin master'
 alias c='ctool'
 alias arj='ant realclean jar'
-alias killcass="pkill -f 'java.*cassandra'" # kills all orphaned CCM nodes that may not have been caught on failed test shutdowns
+alias killcass="pkill -f 'java.*cass'" # kills all orphaned CCM nodes that may not have been caught on failed test shutdowns
 alias findcass="ps auwx | grep cass" # ensures no Cassandra instances are running
 alias hr="printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' /"
+alias nuget="mono /home/kishan/git/cstar/csharp-driver/tools/NuGet.exe"
+alias cleanup='ccm remove && pkill -9 java && killall java'
 
 ## tell grep to highlight matches
 export GREP_OPTIONS='--color=auto'
@@ -23,17 +26,47 @@ export EDITOR=vim
 ## env variables
 export PYTHONPATH="/home/kishan/git/cstar/automaton":${PYTHONPATH}
 export PYTHONPATH="/home/kishan/git/cstar/python-driver":${PYTHONPATH}
+export PYTHONPATH="/home/kishan/git/ccm":${PYTHONPATH}
 export AUTOMATON_HOME=~/git/cstar/automaton
-#export CASSANDRA_DIR=~/git/cstar/cassandra
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export PATH=$PATH:/home/kishan/git/cstar/automaton/bin
-export PATH=$PATH:/home/kishan/git/cstar/automaton/bashcomplete/ctool.bash_complete
-#export PROTOCOL_VERSION=3
-#export CASSANDRA_VERSION=2.1.0-rc5
+export PATH=$PATH:/home/kishan/git/ccm
+export PATH=$PATH:/home/kishan/.mvn/apache-maven-3.3.9/bin
+export PATH=$PATH:/home/kishan/.rbenv/bin
+eval "$(rbenv init -)"
 
-## set custom bash prompt
-#export PS1="\[\033[1;34m\]\!\[\033[0m\] \[\033[1;35m\]\u\[\033[0m\]:\[\033[1;35m\]\W\[\033[0m\]$ "
+## minitest alias
+function runtest() {
+  if [ $# -eq 0 ] ; then
+    echo "Usage: runtest cassandra-version testfile-glob optional-test-name"
+    return 1
+  fi
+ 
+  if [ $# -ge 2 ] ; then
+    local TGLOBARG="TEST=$2"
+  fi
+  if [ $# -eq 3 ] ; then
+    local TOPTS="--name=$3 -v"
+  fi
+  echo CASSANDRA_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
+  CASSANDRA_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
+}
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+function runtestdse() {
+  if [ $# -eq 0 ] ; then
+    echo "Usage: runtestdse dse-version testfile-glob optional-test-name"
+    return 1
+  fi
+ 
+  if [ $# -ge 2 ] ; then
+    local TGLOBARG="TEST=$2"
+  fi
+  if [ $# -eq 3 ] ; then
+    local TOPTS="--name=$3 -v"
+  fi
+  echo DSE_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
+  DSE_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
+}
 
 
 # Reset
