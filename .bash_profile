@@ -6,15 +6,12 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 alias ls='ls -FGalh --color'
 alias gs='git status'
 alias gp='git pull origin master'
-alias gpt='git pull origin trunk'
-alias gpd='git pull datastax master'
 alias gpm='git push origin master'
 alias c='ctool'
 alias arj='ant realclean jar'
 alias killcass="pkill -f 'java.*cass'" # kills all orphaned CCM nodes that may not have been caught on failed test shutdowns
 alias findcass="ps auwx | grep cass" # ensures no Cassandra instances are running
 alias hr="printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' /"
-alias nuget="mono /home/kishan/git/cstar/csharp-driver/tools/NuGet.exe"
 alias cleanup='ccm remove && pkill -9 java && killall java'
 
 ## tell grep to highlight matches
@@ -24,12 +21,9 @@ export GREP_OPTIONS='--color=auto'
 export EDITOR=vim
 
 ## env variables
-export PYTHONPATH="/home/kishan/git/cstar/automaton":${PYTHONPATH}
-export PYTHONPATH="/home/kishan/git/cstar/python-driver":${PYTHONPATH}
 export PYTHONPATH="/home/kishan/git/ccm":${PYTHONPATH}
 export AUTOMATON_HOME=~/git/cstar/automaton
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export PATH=$PATH:/home/kishan/git/cstar/automaton/bin
 export PATH=$PATH:/home/kishan/git/ccm
 export PATH=$PATH:/home/kishan/.mvn/apache-maven-3.3.9/bin
 export PATH=$PATH:/home/kishan/.rbenv/bin
