@@ -59,3 +59,7 @@ inoremap <Nul> <C-x><C-o>
 map <C-k> :NERDTreeToggle<CR>
 exe "set rtp+=" . globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cw
+
+set backupdir=/tmp//
+set directory=/tmp//
+set undodir=/tmp//

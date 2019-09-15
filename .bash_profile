@@ -7,12 +7,7 @@ alias ls='ls -FGalh --color'
 alias gs='git status'
 alias gp='git pull origin master'
 alias gpm='git push origin master'
-alias c='ctool'
-alias arj='ant realclean jar'
-alias killcass="pkill -f 'java.*cass'" # kills all orphaned CCM nodes that may not have been caught on failed test shutdowns
-alias findcass="ps auwx | grep cass" # ensures no Cassandra instances are running
 alias hr="printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' /"
-alias cleanup='ccm remove && pkill -9 java && killall java'
 
 ## tell grep to highlight matches
 export GREP_OPTIONS='--color=auto'
@@ -21,47 +16,10 @@ export GREP_OPTIONS='--color=auto'
 export EDITOR=vim
 
 ## env variables
-export PYTHONPATH="/home/kishan/git/ccm":${PYTHONPATH}
-export AUTOMATON_HOME=~/git/cstar/automaton
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export PATH=$PATH:/home/kishan/git/ccm
-export PATH=$PATH:/home/kishan/.mvn/apache-maven-3.3.9/bin
+export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 export PATH=$PATH:/home/kishan/.rbenv/bin
 eval "$(rbenv init -)"
-
-## minitest alias
-function runtest() {
-  if [ $# -eq 0 ] ; then
-    echo "Usage: runtest cassandra-version testfile-glob optional-test-name"
-    return 1
-  fi
- 
-  if [ $# -ge 2 ] ; then
-    local TGLOBARG="TEST=$2"
-  fi
-  if [ $# -eq 3 ] ; then
-    local TOPTS="--name=$3 -v"
-  fi
-  echo CASSANDRA_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
-  CASSANDRA_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
-}
-
-function runtestdse() {
-  if [ $# -eq 0 ] ; then
-    echo "Usage: runtestdse dse-version testfile-glob optional-test-name"
-    return 1
-  fi
- 
-  if [ $# -ge 2 ] ; then
-    local TGLOBARG="TEST=$2"
-  fi
-  if [ $# -eq 3 ] ; then
-    local TOPTS="--name=$3 -v"
-  fi
-  echo DSE_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
-  DSE_VERSION=$1 bundle exec rake integration $TGLOBARG TESTOPTS="$TOPTS"
-}
-
+export PATH=$PATH:/home/kishan/Downloads/node-v12.6.0-linux-x64/bin
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
