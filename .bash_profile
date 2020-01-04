@@ -5,6 +5,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 ## alias
 alias ls='ls -FGalh --color'
 alias gs='git status'
+alias gf='git fetch'
 alias gp='git pull origin master'
 alias gpm='git push origin master'
 alias hr="printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' /"
@@ -16,10 +17,9 @@ export GREP_OPTIONS='--color=auto'
 export EDITOR=vim
 
 ## env variables
-export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
-export PATH=$PATH:/home/kishan/.rbenv/bin
-eval "$(rbenv init -)"
-export PATH=$PATH:/home/kishan/Downloads/node-v12.6.0-linux-x64/bin
+#export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+#export PATH=$PATH:/home/kishan/.rbenv/bin
+#eval "$(rbenv init -)"
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
