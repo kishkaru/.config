@@ -3,15 +3,17 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 ## alias
-alias ls='ls -FGalh --color'
+alias ls='ls -FGahl --color'
 alias gs='git status'
 alias gf='git fetch'
 alias gp='git pull origin master'
 alias gpm='git push origin master'
 alias hr="printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' /"
+alias dps="docker ps -a"
+alias di="docker image ls -a"
 
 ## tell grep to highlight matches
-export GREP_OPTIONS='--color=auto'
+alias grep="grep --color=auto"
 
 ## tell bash to use vim when vi called
 export EDITOR=vim
@@ -20,6 +22,10 @@ export EDITOR=vim
 #export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 #export PATH=$PATH:/home/kishan/.rbenv/bin
 #eval "$(rbenv init -)"
+
+#export PATH="/home/kishan/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
@@ -64,13 +70,16 @@ On_Purple='\e[45m'      # Purple
 On_Cyan='\e[46m'        # Cyan
 On_White='\e[47m'       # White
  
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
+#function parse_git_dirty {
+#  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+#}
+#function parse_git_branch {
+#  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+#}
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
 }
-# export PS1='\u@\h \[\033[1;33m\]\w\[\033[0m\]$(parse_git_branch)$ '
+
 PS1="\[$Cyan\]\@:"                            # Display time
 PS1=$PS1"\[$BBlue\]\w"                         # Display a green pwd
 PS1=$PS1"\[$BGreen\]"'$(parse_git_branch)'       # Display a cyan git-branch
@@ -78,3 +87,17 @@ PS1=$PS1"\[$BBlue\] $ "
 PS1=$PS1"\[$Color_Off\]"                      # Turn off color and end prompt
  
 export PS1=$PS1
+
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=-1
+export HISTSIZE=-1
+export HISTTIMEFORMAT="[%F %T] "
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
