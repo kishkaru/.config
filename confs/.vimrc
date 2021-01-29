@@ -3,6 +3,7 @@ if has("syntax")
 endif
 
 set nocompatible
+set backspace=indent,eol,start
 set laststatus=2
 
 set showcmd		" Show (partial) command in status line.
