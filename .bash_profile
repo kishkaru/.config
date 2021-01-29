@@ -36,9 +36,6 @@ alias grep="grep --color=auto"
 
 ## tell bash to use vim when vi called
 export EDITOR=vim
-export PATH=$PATH:/da/ToolsAndLibs/CodingScripts
-export PATH=/da/ToolsAndLibs/NoArch/PyTools/RBTools-0.5.2/bin/:$PATH
-export PATH=/usr/local/opt/node@12/bin:$PATH
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
